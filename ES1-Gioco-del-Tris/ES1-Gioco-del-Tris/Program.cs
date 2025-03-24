@@ -25,6 +25,7 @@
                     }
                     else
                     {
+                        
                          TurnoPlayer_2(table, player_2);
                         turnoGiocatore--;
                     
@@ -53,26 +54,54 @@
         }
         static void TurnoPlayer_1(char[,] box, string nome)
         {
-            Console.WriteLine($"\nTurno di {nome} il tuo segno è lo 'O' ");
-            Console.WriteLine("In che posizione metti il tuo segno:");
-            Console.Write("Righa:");
-            int righa_player_1 = int.Parse(Console.ReadLine());
-            Console.Write("Colonna:");
-            int colonna_player_1 = int.Parse(Console.ReadLine());
+            int righa_player_1;
+            int colonna_player_1;
+            bool controllo;
+            do
+            {
+                Console.WriteLine($"\nTurno di {nome} il tuo segno è lo 'O' ");
+                Console.WriteLine("In che posizione metti il tuo segno:");
+                Console.Write("Righa:");
+                righa_player_1 = int.Parse(Console.ReadLine());
+                Console.Write("Colonna:");
+                colonna_player_1 = int.Parse(Console.ReadLine());
+                 controllo = controllo_posione(box, righa_player_1, colonna_player_1);
+            } while (controllo);
+
             box[righa_player_1 - 1, colonna_player_1 - 1] = 'O';
             stampaGrafica(box);
             
         }
         static void TurnoPlayer_2(char[,] box,  string nome)
         {
-            Console.WriteLine($"\nTurno di {nome} il tuo segno è lo 'X' ");
-            Console.WriteLine("In che posizione metti il tuo segno:");
-            Console.Write("Righa:");
-            int righa_player_1 = int.Parse(Console.ReadLine());
-            Console.Write("Colonna:");
-            int colonna_player_1 = int.Parse(Console.ReadLine());
-            box[righa_player_1 - 1, colonna_player_1 - 1] = 'X';
+            int righa_player_2;
+            int colonna_player_2;
+            bool controllo;
+            do
+            {
+                Console.WriteLine($"\nTurno di {nome} il tuo segno è lo 'X' ");
+                Console.WriteLine("In che posizione metti il tuo segno:");
+                Console.Write("Righa:");
+                righa_player_2 = int.Parse(Console.ReadLine());
+                Console.Write("Colonna:");
+                colonna_player_2 = int.Parse(Console.ReadLine());
+                 controllo = controllo_posione(box, righa_player_2, colonna_player_2);
+            } while (controllo);
+
+                box[righa_player_2 - 1, colonna_player_2 - 1] = 'X';
             stampaGrafica(box);
+            
+        }
+        static bool controllo_posione(char[,]box,int riga, int colonna)
+        {
+            if (box[riga, colonna] == 'O' || box[riga, colonna] == 'X')
+            {
+                Console.WriteLine("La posizione inserita è già occupata.\n" +
+                    "Inserire un'altra posozione");
+                return true;
+            }
+            return false;
+            //W.I.B
             
         }
 
